@@ -1,3 +1,5 @@
+from data_store import write_file
+
 def cekUser(users, user):
     for u in users:
         if u['user'] == user :
@@ -23,6 +25,7 @@ def tarikTunai(account, transaksi, user):
         if account[a]['user'] == user:
             if account[a]['amount'] - int(amount) >= 0:
                 account[a]['amount'] -= int(amount)
+                write_file('account.txt', account)
                 transaksi.append(
                     {
                         'user':user,
@@ -31,6 +34,7 @@ def tarikTunai(account, transaksi, user):
                         'type': 'withdraw',
                     }
                 )
+                write_file('transaksi.txt', transaksi)
                 print('Tarik tunai berhasil!')
             else:
                 print('Maaf, Saldo kamu tidak cukup!')
@@ -40,6 +44,7 @@ def setorTunai(account, transaksi, user):
     for a in range(len(account)):
         if account[a]['user'] == user:
             account[a]['amount'] += int(amount)
+            write_file('account.txt', account)
             transaksi.append(
                 {
                     'user':user,
@@ -49,8 +54,8 @@ def setorTunai(account, transaksi, user):
                 }
             )
             print('Saldo berhasil di tambahkan!')
-
-def transfer(account, transaction, user):
+            write_file('transaksi.txt', transaksi)
+def transfer(account, transaksi, user):
     amount = input('Masukkan jumlah transfer : ')
     while True:
         tujuan = input('Masukkan nama tujuan : ')
@@ -62,7 +67,8 @@ def transfer(account, transaction, user):
                         for a in range(len(account)):
                             if account[a]['user'] == tujuan:
                                 account[a]['amount'] += int(amount)
-                                transaction.append(
+                                write_file('account.txt', account)
+                                transaksi.append(
                                     {
                                         'user':user,
                                         'to': tujuan,
@@ -70,6 +76,7 @@ def transfer(account, transaction, user):
                                         'type': 'transfer',
                                     }
                                 )
+                                write_file('transaksi.txt', transaksi)
                                 print('Transfer berhasil!')
                                 return True
                     else:
