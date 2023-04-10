@@ -1,22 +1,13 @@
 from admin import tambahUser, hapusUser, lihatUser, lihatSemuaTransaksi
 from customer import cekSaldo, tarikTunai, setorTunai, transfer, lihatTransaksi
-users = [
-    {
-        'user': 'nandan@gmail.com',
-        'password': '123',
-        'role': 'admin'
-    }
-]
-
+from data_store import read_file
+users = read_file('user.txt')
 cUser = {}
-transaksi = []
 
-account = [
-    {
-        'user':'nandan',
-        'amount': 0
-    },
-]
+transaksi = read_file('transaksi.txt')
+
+account = read_file('account.txt')
+
 
 
 def infoLogin(user, password, cUser):
@@ -50,7 +41,7 @@ def menu(cUser):
             if pilihan == '1':
                 tambahUser(users, account)
             elif pilihan == '2':
-                hapusUser(users, account)
+                hapusUser(users, account, transaksi)
             elif pilihan == '3':
                 lihatUser(users)
             elif pilihan == '4':
@@ -95,5 +86,4 @@ def main():
         elif pilihan == '2':
             break
         print('\033c', end='')
-
 main()
