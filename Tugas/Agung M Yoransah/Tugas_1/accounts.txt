@@ -1,1 +1,0 @@
-[{"username": "agung@gmail.com", "amount": 41000}, {"username": "ff", "amount": 40410}]

@@ -1,8 +1,3 @@
-from file_ops import write_to_file, read_file
-import copy
-__USER_FILE = 'users.txt'
-__ACCOUNT_FILE = 'accounts.txt'
-
 def cekUser(users, username):
     for u in users:
         if u['username'] == username :
@@ -29,19 +24,17 @@ def addUser(users, account):
                 'username' : username,
                 'password' : password,
                 'role' : role
-            })            
-            write_to_file(__USER_FILE, users),
+            }),
             account.append({
                 'username' : username,
                 'amount' : 0,
             })
-            write_to_file(__ACCOUNT_FILE, account)
             print('User berhasil di tambahkan!')
             return True
         else:
             print('Username sudah digunakan!')
 
-def deleteUser(users, account, transaction):
+def deleteUser(users, account):
     print('Daftar user :')
     for u in range(len(users)):
         print(str(u+1), '. ', users[u]['username'], ' (',users[u]['role'],')')
@@ -51,14 +44,7 @@ def deleteUser(users, account, transaction):
         for u in range(len(users)):
             if users[u]['username'] == choice:
                 users.pop(u)
-                write_to_file(__USER_FILE, users)
-                b = copy.copy(transaction)
-                for t in b:
-                    if t['username'] == choice:
-                        transaction.remove(t)
-                        write_to_file('transactions.txt', transaction)
                 account.pop(u)
-                write_to_file(__ACCOUNT_FILE, account)
                 print('User dihapus')
                 return True
         print('Pilih username yang ada!')

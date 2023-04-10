@@ -1,13 +1,22 @@
 from user import addUser, deleteUser, showUser, showAllTransaction
 from transactions import showBalance, withdraw, deposit, transfer, showTransaction
-from file_ops import write_to_file, read_file
-
-users = read_file("users.txt")
+users = [
+    {
+        'username': 'agung@gmail.com',
+        'password': '123',
+        'role': 'admin'
+    }
+]
 
 current_user = {}
-transaction = read_file("transactions.txt")
+transaction = []
 
-account = read_file("accounts.txt")
+account = [
+    {
+        'username':'agung@gmail.com',
+        'amount': 0
+    },
+]
 
 
 def login(username, password, current_user):
@@ -31,7 +40,6 @@ def login_process(current_user):
 def menu(current_user):
     if current_user['role'] == 'admin':
         while True:
-            # print(current_user)
             print('Menu')
             print('1. Add User')
             print('2. Delete User')
@@ -42,7 +50,7 @@ def menu(current_user):
             if choice == '1':
                 addUser(users, account)
             elif choice == '2':
-                deleteUser(users, account, transaction)
+                deleteUser(users, account)
             elif choice == '3':
                 showUser(users)
             elif choice == '4':

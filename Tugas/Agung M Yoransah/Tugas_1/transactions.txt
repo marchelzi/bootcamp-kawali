@@ -1,1 +1,0 @@
-[{"username": "ff", "to": "self", "amount": 50000, "type": "deposit"}, {"username": "ff", "to": "self", "amount": 4590, "type": "Tarik Tunai"}, {"username": "ff", "to": "agung@gmail.com", "amount": 5000, "type": "transfer"}]

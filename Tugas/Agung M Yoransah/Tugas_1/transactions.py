@@ -1,5 +1,3 @@
-from file_ops import write_to_file, read_file
-
 def cekUser(users, username):
     for u in users:
         if u['username'] == username :
@@ -25,7 +23,6 @@ def withdraw(account, transaction, username):
         if account[a]['username'] == username:
             if account[a]['amount'] - int(amount) >= 0:
                 account[a]['amount'] -= int(amount)
-                write_to_file('accounts.txt', account)
                 transaction.append(
                     {
                         'username':username,
@@ -34,7 +31,6 @@ def withdraw(account, transaction, username):
                         'type': 'Tarik Tunai',
                     }
                 )
-                write_to_file('transactions.txt', transaction)
                 print('Tarik Tunai Berhasil')
 
             else:
@@ -45,7 +41,6 @@ def deposit(account, transaction, username):
     for a in range(len(account)):
         if account[a]['username'] == username:
             account[a]['amount'] += int(amount)
-            write_to_file('accounts.txt', account)
             transaction.append(
                 {
                     'username':username,
@@ -54,7 +49,6 @@ def deposit(account, transaction, username):
                     'type': 'deposit',
                 }
             )
-            write_to_file('transactions.txt', transaction)
             print('Saldo berhasil di tambahkan!')
 
 def transfer(account, transaction, username):
@@ -69,7 +63,6 @@ def transfer(account, transaction, username):
                         for a in range(len(account)):
                             if account[a]['username'] == to:
                                 account[a]['amount'] += int(amount)
-                                write_to_file('accounts.txt', account)
                                 transaction.append(
                                     {
                                         'username':username,
@@ -78,7 +71,6 @@ def transfer(account, transaction, username):
                                         'type': 'transfer',
                                     }
                                 )
-                                write_to_file('transactions.txt', transaction)
                                 print('Transfer berhasil!')
                                 return True
                     else:
